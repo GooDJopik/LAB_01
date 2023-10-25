@@ -2,9 +2,12 @@ from ast import main
 from bs4 import BeautifulSoup
 import requests
 import csv
-import os
 
-def parser(year_from, year_to, step=1):
+def correct_wind_info(wind: str) -> tuple:
+    durection, speed = wind.split()
+    return durection, speed[:len(speed)-3]
+
+def parser(year_from:int, year_to:int, step=1) -> list:
     parser_data = []
     for year in range(year_from, year_to + 1, step):
         for month in range(1, 13):
@@ -16,13 +19,14 @@ def parser(year_from, year_to, step=1):
                     temp = day.find_next()
                     press = temp.find_next()
                     wind = press.find_next_sibling().find_next_sibling().find_next_sibling()
-                    parser_data.append([day.text + "." + str(month).zfill(2) + "." + str(year), temp.text + "°C", press.text + "mm.pt.ct.", wind.text])
+                    durection, digit_speed = correct_wind_info(wind.text)
+                    parser_data.append([str(year) + "-" + str(month).zfill(2) + "-" + day.text.zfill(2), int(temp.text), press.text, durection, digit_speed])
                 except:
-                    print("Parsing error for " + day.text + "." + str(month).zfill(2) + "." + str(year))
+                    pass
     return parser_data   
          
 
-def upload_csv(parser_data):
+def upload_csv(parser_data) -> None:
     with open('dataset.csv', 'w', encoding="utf-8", newline="") as file:
         writer = csv.writer(file)
         writer.writerows(parser_data)
