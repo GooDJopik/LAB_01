@@ -29,8 +29,7 @@ def parser(year_from:int, year_to:int, step=1) -> list:
     return parser_data   
 
 
-@ef.change_work_dir(name=r"\datasets")
-         
+@ef.change_work_dir(name=r"\datasets")         
 def upload_csv(parser_data: list) -> None:
     with open('dataset.csv', 'w', encoding="utf-8", newline="") as file:
         writer = csv.writer(file)
@@ -38,9 +37,3 @@ def upload_csv(parser_data: list) -> None:
 
 
 '''upload_csv(parser(2008, 2023))'''
-
-
-
-
-
-
