@@ -1,4 +1,4 @@
-from ast import main
+
 from bs4 import BeautifulSoup
 import requests
 import csv
@@ -34,8 +34,6 @@ def upload_csv(parser_data) -> None:
 
 upload_csv(parser(2008, 2023))
 
-if __name__ == '__main__':
-    main()
 
 
 
