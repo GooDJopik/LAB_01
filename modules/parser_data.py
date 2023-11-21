@@ -2,6 +2,9 @@
 from bs4 import BeautifulSoup
 import requests
 import csv
+import os
+
+import modules.add_functions as ef
 
 def correct_wind_info(wind: str) -> tuple:
     durection, speed = wind.split()
@@ -24,15 +27,17 @@ def parser(year_from:int, year_to:int, step=1) -> list:
                 except:
                     pass
     return parser_data   
-         
 
-def upload_csv(parser_data) -> None:
+
+@ef.change_work_dir(name=r"\datasets")
+         
+def upload_csv(parser_data: list) -> None:
     with open('dataset.csv', 'w', encoding="utf-8", newline="") as file:
         writer = csv.writer(file)
         writer.writerows(parser_data)
 
 
-upload_csv(parser(2008, 2023))
+'''upload_csv(parser(2008, 2023))'''
 
 
 
