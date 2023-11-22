@@ -1,5 +1,6 @@
 import os
 import csv
+import datetime
 
 
 def read_data(path: str) -> list:
@@ -9,19 +10,7 @@ def read_data(path: str) -> list:
             data.append(line)
     return data
 
-
-def change_work_dir(name: str):
-    def decorator(func):
-        def wrapper():
-            path = os.getcwd()
-            os.chdir(f"{path}{name}")
-            func()
-            os.chdir(path)
-        return wrapper
-    return decorator
-
-
-def growth(next_day: int, today: int) -> int:
-    if next_day < today:
-        return (next_day + 31) - today
-    return next_day - today
+def growth(today: str, next_day: str) -> int:
+    current_day = datetime.datetime.strptime(today, '%Y-%m-%d').date()
+    following_day = datetime.datetime.strptime(next_day, '%Y-%m-%d').date()
+    return (following_day - current_day).days

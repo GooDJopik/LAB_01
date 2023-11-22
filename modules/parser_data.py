@@ -27,13 +27,11 @@ def parser(year_from:int, year_to:int, step=1) -> list:
                 except:
                     pass
     return parser_data   
-
-
-@ef.change_work_dir(name=r"\datasets")         
+    
 def upload_csv(parser_data: list) -> None:
+    path = os.getcwd()
+    os.chdir(r"D:\Python_lab\python_lab\datasets")
     with open('dataset.csv', 'w', encoding="utf-8", newline="") as file:
         writer = csv.writer(file)
         writer.writerows(parser_data)
-
-
-'''upload_csv(parser(2008, 2023))'''
+    os.chdir(path)
