@@ -6,7 +6,7 @@ import modules.add_functions as ef
 
 
 
-def division_date_and_data(directory_path: str) -> None:
+def distribution_date_and_data(directory_path: str) -> None:
     path = os.getcwd()
     os.chdir(directory_path)
     data = ef.read_data(r"C:\Ycheba\2_kurs\LAB_Python\datasets\dataset.csv")
@@ -19,7 +19,7 @@ def division_date_and_data(directory_path: str) -> None:
     os.chdir(path)
 
 
-def division_by_year(directory_path: str) -> None:
+def distribution_by_year(directory_path: str) -> None:
     data = ef.read_data(r"C:\Ycheba\2_kurs\LAB_Python\datasets\dataset.csv")
     path = os.getcwd()
     os.chdir(directory_path)
@@ -41,24 +41,16 @@ def division_by_year(directory_path: str) -> None:
             writer.writerows(data_year)
     os.chdir(path)
 
-def division_by_week(directory_path: str, start_day: int) -> None:
+def distribution_by_week(input_file, directory_path) -> None:
     data = ef.read_data(r"D:\Python_lab\python_lab\datasets\dataset.csv")
     path = os.getcwd()
     os.chdir(directory_path)
-    day_of_week = start_day
-    data_week = [data[0]]
-    for i in range(1, len(data) - 1):
-        if day_of_week >= 7:
-            data_week.append(data[i])
-            day_of_week = 0
-            a = "".join(data_week[0][0].split("-"))
-            b = "".join(data_week[len(data_week) - 1][0].split("-"))
-            with open(f"{a}_{b}.csv", 'w', encoding="utf-8", newline="") as file:
-                writer = csv.writer(file)
-                writer.writerows(data_week)
-            data_week.clear()
-            day_of_week += ef.growth(data[i][0], data[i+1][0])
-            continue
-        data_week.append(data[i])
-        day_of_week += ef.growth(data[i][0], data[i+1][0])
+    data = ef.read_csv(input_file)
+    data['date'] = ef.datetime(data['date'])
+    
+    for week_start in data['date'].dt.to_period('W').unique():
+        week_end = week_start.end_time
+        week_data = data[(data['date'] >= week_start.start_time) & (data['date'] <= week_end)]
+        output_file = f'{directory_path}/{week_data.iloc[0]["date"].strftime("%Y%m%d")}_{week_data.iloc[-1]["date"].strftime("%Y%m%d")}.csv'
+        week_data.to_csv(output_file, index=False)
     os.chdir(path)
