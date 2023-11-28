@@ -4,8 +4,6 @@ import requests
 import csv
 import os
 
-import modules.add_functions as ef
-
 def correct_wind_info(wind: str) -> tuple:
     durection, speed = wind.split()
     return durection, speed[:len(speed)-3]
@@ -30,7 +28,7 @@ def parser(year_from:int, year_to:int, step=1) -> list:
     
 def upload_csv(parser_data: list) -> None:
     path = os.getcwd()
-    os.chdir(r"D:\Python_lab\python_lab\datasets")
+    os.chdir(r"C:\Ycheba\2_kurs\LAB_Python\datasets")
     with open('dataset.csv', 'w', encoding="utf-8", newline="") as file:
         writer = csv.writer(file)
         writer.writerows(parser_data)
