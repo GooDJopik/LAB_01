@@ -1,7 +1,4 @@
-
 import csv
-
-
 
 def read_data(path: str) -> list:
     data = []
