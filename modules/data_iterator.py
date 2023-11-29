@@ -1,5 +1,4 @@
-import add_functions as ef
-
+import distribution_data as ef
 
 class datainterator:
     def __init__(self):
