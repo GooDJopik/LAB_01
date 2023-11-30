@@ -17,23 +17,25 @@ def growth(date1: str, date2: str) -> int:
     return (next_day - current_day).days
 
 
-def distribution_date_and_data(directory_path: str) -> None:
+def distribution_date_and_data(directory_path: str, file_path: str) -> None:
     path = os.getcwd()
     os.chdir(directory_path)
-    data = read_data(r"C:\Ycheba\2_kurs\LAB_Python\datasets\dataset.csv")
-    x_data = [[i[0].split("-")] for i in data]
-    y_data = [i[1:] for i in data]   
+    data = read_data(file_path)
+    
+    x_data = [[i[0].split("-")] for i in data]   
     with open('X.csv', 'w', encoding="utf-8", newline="") as file:
         writer = csv.writer(file)
-        writer.writerows(x_data)   
+        writer.writerows(x_data)  
+
+    y_data = [i[1:] for i in data] 
     with open('Y.csv', 'w', encoding="utf-8", newline="") as file:
         writer = csv.writer(file)
         writer.writerows(y_data)
     os.chdir(path)
 
 
-def distribution_by_year(directory_path: str) -> None:
-    data = read_data(r"C:\Ycheba\2_kurs\LAB_Python\datasets\dataset.csv")
+def distribution_by_year(directory_path: str, file_path: str) -> None:
+    data = read_data(file_path)
     path = os.getcwd()
     os.chdir(directory_path)
     year_list = []
@@ -49,8 +51,8 @@ def distribution_by_year(directory_path: str) -> None:
             writer.writerows(data_year)
     os.chdir(path)
 
-def distribution_by_week(directory_path: str, start_day: int) -> None:
-    data = read_data(r"C:\Ycheba\2_kurs\LAB_Python\datasets\dataset.csv")
+def distribution_by_week(directory_path: str, start_day: int, file_path: str, ) -> None:
+    data = read_data(file_path)
     path = os.getcwd()
     os.chdir(directory_path)
     day_of_week = start_day

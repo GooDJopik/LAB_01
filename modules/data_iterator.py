@@ -1,11 +1,19 @@
-import distribution_data as ef
+import modules.distribution_data as ef
 
-class datainterator:
-    def __init__(self):
-        self.__data = ef.read_data(
-            r"C:\Ycheba\2_kurs\LAB_Python\datasets\dataset.csv")
+class DataIterator():
+    
+    def __init__(self, path: str):
+        self.__data = ef.read_data(path)
         self.__index = -1
-
+        
+    @property
+    def index(self):
+        return self.__index
+    
+    @index.setter
+    def index(self, value):
+        self.__index = value
+        
     def __iter__(self):
         return self
 
