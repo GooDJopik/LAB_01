@@ -8,9 +8,9 @@ def correct_wind_info(wind: str) -> tuple:
     durection, speed = wind.split()
     return durection, speed[:len(speed)-3]
 
-def parser(year_from:int, year_to:int, step=1) -> list:
+def parser(year_from:int, year_to:int) -> list:
     parser_data = []
-    for year in range(year_from, year_to + 1, step):
+    for year in range(year_from, year_to + 1):
         for month in range(1, 13):
             URL = f"https://www.gismeteo.ru/diary/4618/{year}/{month}/"
             html_page = requests.get(URL, headers={"User-Agent": "Mozilla/5.0"})
