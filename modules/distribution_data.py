@@ -21,7 +21,7 @@ def distribution_date_and_data(directory_path: str, file_path: str) -> None:
     path = os.getcwd()
     os.chdir(directory_path)
     data = read_data(file_path)
-    
+
     x_data = [[i[0].split("-")] for i in data]   
     with open('X.csv', 'w', encoding="utf-8", newline="") as file:
         writer = csv.writer(file)
@@ -51,7 +51,7 @@ def distribution_by_year(directory_path: str, file_path: str) -> None:
             writer.writerows(data_year)
     os.chdir(path)
 
-def distribution_by_week(directory_path: str, start_day: int, file_path: str, ) -> None:
+def distribution_by_week(directory_path: str, start_day: int, file_path: str) -> None:
     data = read_data(file_path)
     path = os.getcwd()
     os.chdir(directory_path)

@@ -145,7 +145,7 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.input_descr.setText(_translate("MainWindow", "Введите дату:"))
         self.btn_get_data.setText(_translate(
-            "MainWindow", "Получить информацию"))
+            "MainWindow", "Получить данные"))
         self.info.setText(_translate("MainWindow", "Температура: -20 °C\n"
                                      "Давление: 765 мм.рт.ст.\n"
                                      "Ветер: В 2 м/c"))
